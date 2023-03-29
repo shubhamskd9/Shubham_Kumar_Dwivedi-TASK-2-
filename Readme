@@ -1,0 +1,49 @@
+This is a Node.js web application with Express.js as the server framework and MongoDB as the database. It defines various routes that handle HTTP requests and perform operations on the database.
+
+require("dotenv").config() - This loads environment variables from a .env file into process.env.
+
+const express= require("express"); - This imports the Express.js library and creates an instance of the Express application.
+
+const bodyParser=require("body-parser") - This imports the body-parser middleware which is used to parse the request body.
+
+const mongoose=require("mongoose"); - This imports the mongoose library which is used for MongoDB object modeling and provides a higher-level API for interacting with the database.
+
+const bcrypt=require("bcrypt"); - This imports the bcrypt library which is used for hashing passwords.
+
+const nodemailer=require("nodemailer"); - This imports the nodemailer library which is used for sending emails.
+
+const jwt=require("jsonwebtoken"); - This imports the jsonwebtoken library which is used for generating and verifying JSON Web Tokens.
+
+const cookieParser=require("cookie-parser"); - This imports the cookie-parser middleware which is used to parse cookies.
+
+app.set('view engine', 'ejs'); - This sets the view engine to ejs, which is a templating language used to generate HTML.
+
+app.use(bodyParser.urlencoded({extended: true})); - This sets up the body-parser middleware to parse URL-encoded data.
+
+app.use(express.static("public")); - This serves static files (such as CSS and JavaScript files) from the public directory.
+
+app.use(cookieParser()); - This sets up the cookie-parser middleware to parse cookies.
+
+const mongoURI="mongodb://0.0.0.0:27017/CustomerDB" - This is the URI for connecting to the MongoDB database.
+
+mongoose.connect(mongoURI,{ useNewUrlParser: true, useUnifiedTopology: true }) - This connects to the MongoDB database using the mongoose library.
+
+const productSchema= new mongoose.Schema({ id: String, name: String, time: String }) - This defines the schema for a product in the database.
+
+const customerSchema= new mongoose.Schema({ name: String, email: String, id: String, number: Number, products: [productSchema] }); - This defines the schema for a customer in the database. A customer can have multiple products.
+
+const Customer= mongoose.model("Customer",customerSchema); - This creates a model for the customer schema in the database.
+
+app.get("/",(req,res)=>{... - This defines a route for the homepage that retrieves all the customers from the database and renders them using the collection.ejs template.
+
+app.get("/create-Customer",(req,res)=>{... - This defines a route for the customer creation page that renders the createCollection.ejs template.
+
+app.post("/create-Customer",(req,res)=>{... - This defines a route for creating a new customer in the database. It checks if the customer already exists and if not, creates a new customer.
+
+app.get("/:customer/delete",(req,res)=>{... - This defines a route for deleting a customer from the database.
+
+app.get("/:customer/update-customer",(req,res)=>{... - This defines a route for updating a customer's details.
+
+app.post("/:customer/update-customer",(req,res)=>{... - This defines a route for updating a customer's details in the database.
+
+app.get("/:customer/product",(req,res)=>{... - This defines a route for displaying a customer's products.
